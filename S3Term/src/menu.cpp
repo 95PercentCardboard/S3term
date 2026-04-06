@@ -4,7 +4,46 @@
 #include "gfx.h"
 #include "cube.h"
 
-void button(){
+void br(){gfx->fillScreen(BLUE);}
+
+void bl(){gfx->fillScreen(RED);}
+
+void tr(){gfx->fillScreen(YELLOW);}
+
+void tl(){gfx->fillScreen(WHITE);}
+
+void buttons(){
+	gfx->drawPixel(0,0,RED);
+	TOUCHINFO ti;
+	while (true) {
+		if (bbct.getSamples(&ti)) {
+			for (int i=0; i<ti.count; i++){
+      Serial.print("Touch ");Serial.print(i+1);Serial.print(": ");;
+      Serial.print("  x: ");Serial.print(ti.x[i]);
+      Serial.print("  y: ");Serial.print(ti.y[i]);
+      Serial.print("  size: ");Serial.println(ti.area[i]);
+      Serial.println(' ');
+
+			if (ti.x[i]<51){							//this is some straight nasty code and im sorry for ever writing it
+				if (ti.y[i]<95) {
+					bl();
+				} else if (ti.y[i]>188){
+					tl();
+				}
+			} else if (ti.x[i]<188){
+				if (ti.y[i]<95) {
+					br();
+				} else if (ti.y[i]>188){
+					tr();
+				}
+			}
+					
+    	} // for each touch point
+  	} //
+	}
+}
+
+void decor(){
 	gfx->drawLine(0,51, 95,51, GREEN);
 	gfx->drawLine(95,51, 132,19, GREEN);
 	gfx->drawLine(132,19, 188,19, GREEN);
@@ -20,6 +59,8 @@ void button(){
 
 void MENU_INIT(){
 	gfx->fillScreen(BLACK);
-	button();
 	CUBE();
+	decor();
+	buttons();
+
 }

@@ -88,7 +88,7 @@ void cubeTask(void* pvParameters){
 
 	while (true) {
 
-		Serial.printf("stack remaining: %d\n\r", uxTaskGetStackHighWaterMark(NULL));
+		//Serial.printf("stack remaining: %d\n\r", uxTaskGetStackHighWaterMark(NULL));
 
 		//create 2d points
 		struct points3d rotated[vertexes];
@@ -130,7 +130,8 @@ void CUBE() {
 	xTaskCreatePinnedToCore(
 		cubeTask,
 		"cubeTask",
-		4096,
+		2048,
+	//^^^^ increase this if loading custom graphics
 		NULL,
 		1,
 		&cubeTaskHandle,

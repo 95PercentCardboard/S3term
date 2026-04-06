@@ -97,4 +97,10 @@
 #define YELLOW 0xFFE0
 #define WHITE 0xFFFF
 
+///////////
+/*aliases*/
+///////////
+
+//dont touch these unless you know what you're doing
+
 #endif

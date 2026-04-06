@@ -2,6 +2,7 @@
 #include <Arduino_GFX_Library.h>
 #include <Wire.h>
 #include <SD_MMC.h>
+#include <bb_captouch.h>
 #include "diagnostics.h"
 #include "pins.h"
 #include "menu.h"
@@ -9,6 +10,9 @@
 
 //this has to be here for graphics to be global. i might find a better place for it later
 Arduino_GFX* gfx = nullptr;
+
+//putting another here bc i cant be bothered. i'll change if we have more globals
+BBCapTouch bbct;
 
 void setup(){
   Serial.begin(115200);
@@ -18,7 +22,13 @@ void setup(){
 	
 	//set rotation and screen type
 	gfx = new Arduino_ILI9341(bus, GFX_NOT_DEFINED, 1, true);
-	
+
+	//initialize touchscreen
+	bbct.init(TOUCH_SDA, TOUCH_SCL, TOUCH_RST, TOUCH_INT);
+
+	//set touchscreen to be aligned with screen
+	bbct.setOrientation(1, 320, 240);
+
 	//start graphics driver and turn on screen backlight
 	gfx->begin();
 	pinMode(TFT_BL, OUTPUT);
