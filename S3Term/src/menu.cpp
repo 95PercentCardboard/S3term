@@ -4,9 +4,9 @@
 #include "gfx.h"
 #include "cube.h"
 
-void br(){gfx->fillScreen(BLUE);}
+void bl(){gfx->fillScreen(BLUE);}
 
-void bl(){gfx->fillScreen(RED);}
+void br(){gfx->fillScreen(RED);}
 
 void tr(){gfx->fillScreen(YELLOW);}
 
@@ -28,11 +28,11 @@ void buttons(){
 				if (ti.y[i]<95) {
 					bl();
 				} else if (ti.y[i]>188){
-					tl();
-				}
-			} else if (ti.x[i]<188){
-				if (ti.y[i]<95) {
 					br();
+				}
+			} else if (ti.x[i]>189){
+				if (ti.y[i]<95) {
+					tl();
 				} else if (ti.y[i]>188){
 					tr();
 				}
