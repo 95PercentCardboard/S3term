@@ -16,7 +16,7 @@ BBCapTouch bbct;
 
 void setup(){
   Serial.begin(115200);
-	//while(!Serial) delay(10);
+	while(!Serial) delay(10);
 	//setup screen data pins
 	Arduino_DataBus *bus = new Arduino_ESP32SPI(TFT_COM, TFT_CS, TFT_SCK, TFT_MOSI , TFT_MISO);
 	
@@ -39,7 +39,10 @@ void setup(){
   I2C_TEST();
 	SD_MMC.setPins(SD_CLK, SD_CMD, SD_D0, SD_D1, SD_D2, SD_D3);
 	SD_TEST();
-	SPI.begin(TFT_SCK, TFT_MISO, TFT_MOSI);
+
+	/////////////////
+	//LINE OF SHAME//_______________________
+	//SPI.begin(TFT_SCK, TFT_MISO, TFT_MOSI);
 
 	//pass the display object so the menu knows where to display
 	MENU_INIT();

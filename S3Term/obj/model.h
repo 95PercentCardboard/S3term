@@ -21,7 +21,7 @@ int boxH = 124;
 
 //do not touch these
 
-const int memUsage = 7168:
+const int memUsage = 7168;
 const int vertexCount = 8;
 const int edgeCount = 12;
 

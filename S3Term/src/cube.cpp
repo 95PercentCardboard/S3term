@@ -44,15 +44,14 @@ points3d rotate(points3d p, float angleX, float angleY, float angleZ) {
 
 //main function that is called
 void cubeTask(void* pvParameters){
-	
 
 	//some vairables to tweak things
 	int screenW = 320;
 	int screenH = 240;
 
-	float scale = screenW * zoom;
-	float offsetX = screenW / float(2.0);
-	float offsetY = screenH / float(2.0);
+	float scale = boxW * zoom;
+	float offsetX = boxW / float(2.0);
+	float offsetY = boxH / float(2.0);
 
 	//float fov = float(2.0); this is defined in the model file now
 	
@@ -60,6 +59,10 @@ void cubeTask(void* pvParameters){
 	float angleY = float(0.0);
 	float angleX = float(0.0);
 	float angleZ = float(0.0);
+
+	//initialize framebuffer
+	Arduino_Canvas*	buffer = new Arduino_Canvas(boxW, boxH, gfx, (screenW-boxW)/2, (screenH-boxH)/2, true);
+	buffer->begin();
 
 	while (true) {
 
@@ -75,14 +78,8 @@ void cubeTask(void* pvParameters){
 
 		flatten(rotated, flats, vertexCount, fov); //take 3d points as input and output the projected points to the 2d struct
 		
-		//for (int i = 0; i < vertexCount; i++) {
- 	  //    Serial.printf("flats[%d]: (%.3f, %.3f)\n\r", i, flats[i].x, flats[i].y);
-		//}
-			
-		int boxW = 124;
-		int boxH = 124;
 
-		gfx->fillRect((screenW-boxW)/2,(screenH-boxH)/2,boxW,boxH,BLACK);
+		buffer->fillScreen(BLACK);
 		
 		for (int i = 0; i < edgeCount; i++) {
 	    int ax = (int)(flats[edges[i].a].x * scale + offsetX);
@@ -90,14 +87,16 @@ void cubeTask(void* pvParameters){
 	    int bx = (int)(flats[edges[i].b].x * scale + offsetX);
 	    int by = (int)(flats[edges[i].b].y * scale + offsetY);
 			
-			gfx->drawLine(ax, ay, bx, by, GREEN);
+			buffer->drawLine(ax, ay, bx, by, WHITE);
 		}
-	
+		
+		buffer->flush();
+
 		angleX += float(rX);
 		angleY += float(rY);
 		angleZ += float(rZ);
 
-		vTaskDelay(pdMS_TO_TICKS(1000/fps)); //about 60fps
+		vTaskDelay(pdMS_TO_TICKS(1000/fps));
 	}
 }
 

@@ -59,8 +59,8 @@ void decor(){
 
 void MENU_INIT(){
 	gfx->fillScreen(BLACK);
-	CUBE();
-	decor();
+	decor();			//they need to draw in this exact order or very
+	CUBE();				//bad things will happen and i have no idea why
 	buttons();
 
 }

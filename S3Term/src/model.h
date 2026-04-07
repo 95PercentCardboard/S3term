@@ -12,7 +12,7 @@ float rZ = 0.02;
 
 float fov = 2.0; //how strong perspective warping is
 
-float zoom = 0.4; //size of model
+float zoom = 1; //size of model
 
 int fps = 60; //how fast the animation runs, lower fps and heighten rotation if you experience performance impacts
 
@@ -21,7 +21,7 @@ int boxH = 124;
 
 //do not touch these
 
-const int memUsage = 7168;
+const int memUsage = 10240;
 const int vertexCount = 8;
 const int edgeCount = 12;
 
