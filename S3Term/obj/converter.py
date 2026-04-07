@@ -51,6 +51,25 @@ def parse_obj(input_path, output_path):
         f.write(f"// Auto-generated from {input_path}\n")
         f.write(f"// {len(vertices)} vertices, {len(edges)} edges\n\n")
 
+        f.write(f"//parameters to be changed by you\n\n")
+
+        f.write(f"float rX = 0.00; //how much you rotate in radians per frame\n")
+        f.write(f"float rY = 0.02; //you get the jist\n")
+        f.write(f"float rZ = 0.00;\n\n")
+
+        f.write(f"float fov = 2.0; //how strong perspective warping is\n\n")
+
+        f.write(f"float zoom = 0.2; //size of model\n\n")
+
+        f.write(f"int fps = 60; //how fast the animation runs, lower fps and heighten rotation if you experience performance impacts\n\n")
+
+        f.write(f"int boxW = 124; //bounding box model will draw inside of\n")
+        f.write(f"int boxH = 124;\n\n")
+       
+        f.write(F"//do not touch these\n\n")
+
+        f.write(f"const int memUsage = {((((len(vertices)*20)+2048+4096)+1023)//1024)*1024};\n")
+
         f.write(f"const int vertexCount = {len(vertices)};\n")
         f.write(f"const int edgeCount = {len(edges)};\n\n")
 
