@@ -318,4 +318,4 @@
  .pio/libdeps/esp32-s3-devkitc-1/GFX\ Library\ for\ Arduino/src/display/Arduino_ST7796.h \
  .pio/libdeps/esp32-s3-devkitc-1/GFX\ Library\ for\ Arduino/src/display/Arduino_WEA2012.h \
  src/gfx.h .pio/libdeps/esp32-s3-devkitc-1/bb_captouch/src/bb_captouch.h \
- src/pins.h
+ src/pins.h src/objtypes.h src/model.h

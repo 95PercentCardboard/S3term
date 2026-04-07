@@ -2,25 +2,14 @@
 #include <math.h>
 #include "gfx.h"
 #include "pins.h"
+#include "objtypes.h"
+#include "model.h"
 
-
-//create a way to handle coordinates
-struct points3d{
-	float x, y, z;
-};
-
-struct points2d{
-	float x, y;
-};
-
-struct edge {
-	int a, b;
-};
 
 //lets other processes kill it
 TaskHandle_t cubeTaskHandle = NULL;
 
-//project 3d vertexes to 2d
+//project 3d vertexCount to 2d
 void flatten(points3d* in, points2d* out,int count, float fov) {
 	for (int i = 0; i < count; i++) {
 		float depth = in[i].z + fov; //add fov to the z value so it looks 3d
@@ -56,30 +45,16 @@ points3d rotate(points3d p, float angleX, float angleY, float angleZ) {
 //main function that is called
 void cubeTask(void* pvParameters){
 	
-	const int edgeCount = 12;
-	
-	const int vertexes = 8;
-
-	struct points3d verts[vertexes] = {
-		{-0.5,-0.5,-0.5}, { 0.5,-0.5,-0.5}, { 0.5, 0.5,-0.5}, {-0.5, 0.5,-0.5},
-  	{-0.5,-0.5, 0.5}, { 0.5,-0.5, 0.5}, { 0.5, 0.5, 0.5}, {-0.5, 0.5, 0.5}
-	};
-
-	struct edge edges[edgeCount] = {
-		{0,1}, {1,2}, {2,3}, {3,0},  // bottom face
-    {4,5}, {5,6}, {6,7}, {7,4},  // top face
-    {0,4}, {1,5}, {2,6}, {3,7}   // vertical edges
-  };
 
 	//some vairables to tweak things
 	int screenW = 320;
 	int screenH = 240;
 
-	float scale = screenW * float(0.4);
+	float scale = screenW * zoom;
 	float offsetX = screenW / float(2.0);
 	float offsetY = screenH / float(2.0);
 
-	float fov = float(2.0);
+	//float fov = float(2.0); this is defined in the model file now
 	
 	//initialize these two so they're not trapped in the function
 	float angleY = float(0.0);
@@ -91,16 +66,16 @@ void cubeTask(void* pvParameters){
 		//Serial.printf("stack remaining: %d\n\r", uxTaskGetStackHighWaterMark(NULL));
 
 		//create 2d points
-		struct points3d rotated[vertexes];
-		struct points2d flats[vertexes];
+		struct points3d rotated[vertexCount];
+		struct points2d flats[vertexCount];
  		
-		for (int i = 0; i < vertexes; i++) {
+		for (int i = 0; i < vertexCount; i++) {
 			rotated[i] = rotate(verts[i], angleX, angleY, angleZ);
 		}
 
-		flatten(rotated, flats, vertexes, fov); //take 3d points as input and output the projected points to the 2d struct
+		flatten(rotated, flats, vertexCount, fov); //take 3d points as input and output the projected points to the 2d struct
 		
-		//for (int i = 0; i < vertexes; i++) {
+		//for (int i = 0; i < vertexCount; i++) {
  	  //    Serial.printf("flats[%d]: (%.3f, %.3f)\n\r", i, flats[i].x, flats[i].y);
 		//}
 			
@@ -118,11 +93,11 @@ void cubeTask(void* pvParameters){
 			gfx->drawLine(ax, ay, bx, by, GREEN);
 		}
 	
-		angleX += float(0.02);
-		angleY += float(0.02);
-		angleZ += float(0.02);
+		angleX += float(rX);
+		angleY += float(rY);
+		angleZ += float(rZ);
 
-		vTaskDelay(pdMS_TO_TICKS(16));
+		vTaskDelay(pdMS_TO_TICKS(1000/fps)); //about 60fps
 	}
 }
 
@@ -130,8 +105,7 @@ void CUBE() {
 	xTaskCreatePinnedToCore(
 		cubeTask,
 		"cubeTask",
-		2048,
-	//^^^^ increase this if loading custom graphics
+		memUsage,
 		NULL,
 		1,
 		&cubeTaskHandle,
