@@ -1,3 +1,5 @@
+import argparse
+
 def parse_obj(input_path, output_path):
     raw_vertices = []
     vertex_map = {}
@@ -57,6 +59,10 @@ def parse_obj(input_path, output_path):
         f.write(f"float rY = 0.02; //you get the jist\n")
         f.write(f"float rZ = 0.00;\n\n")
 
+        f.write(f"float angleX = 0.00; //these are static offsets if you model imports wrong.\n")
+        f.write(f"float angleY = 0.00;\n")
+        f.write(f"float angleZ = 0.00;\n\n")
+
         f.write(f"float fov = 2.0; //how strong perspective warping is\n\n")
 
         f.write(f"float zoom = 0.2; //size of model\n\n")
@@ -91,4 +97,10 @@ def parse_obj(input_path, output_path):
 
     print(f"Done! {len(vertices)} vertices, {len(edges)} edges written to {output_path}")
 
-parse_obj("input.obj", "model.h")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Convert .obj file to firmware header.")
+    parser.add_argument("-i", "--input", required=True, help="Path to input .obj file")
+    parser.add_argument("-o", "--output", required=True, help="Path to output .h file")
+    args = parser.parse_args()
+    parse_obj(args.input, args.output)
+

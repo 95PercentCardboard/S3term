@@ -1,0 +1,8 @@
+## Usage
+run ```python3 /<path_to>/converter.py -i ./input.obj -o /<output_path>/output.h``` to convert the model to a header<br>
+<br>
+until i add a filesystem you just have to rename it to ```model.h``` and place it in ```/S3Term/src``` before compiling<br>
+<br>
+edge count is the only thing that matters and the max i've tested is just shy of 900.<br>
+<br>
+animations and other adjustments are configurable in the first few lines of the generated .h file.

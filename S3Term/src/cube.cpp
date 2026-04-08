@@ -55,14 +55,10 @@ void cubeTask(void* pvParameters){
 
 	//float fov = float(2.0); this is defined in the model file now
 	
-	//initialize these two so they're not trapped in the function
-	float angleY = float(0.0);
-	float angleX = float(0.0);
-	float angleZ = float(0.0);
 
 	//initialize framebuffer
 	Arduino_Canvas*	buffer = new Arduino_Canvas(boxW, boxH, gfx, (screenW-boxW)/2, (screenH-boxH)/2, true);
-	buffer->begin();
+	buffer->begin(GFX_SKIP_OUTPUT_BEGIN); //this parameter just writes the buffer without restarting the screen
 
 	while (true) {
 

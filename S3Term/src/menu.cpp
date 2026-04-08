@@ -13,7 +13,7 @@ void tr(){gfx->fillScreen(YELLOW);}
 void tl(){gfx->fillScreen(WHITE);}
 
 void buttons(){
-	gfx->drawPixel(0,0,RED);
+	//gfx->drawPixel(0,0,RED);
 	TOUCHINFO ti;
 	while (true) {
 		if (bbct.getSamples(&ti)) {

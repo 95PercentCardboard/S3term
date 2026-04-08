@@ -16,7 +16,7 @@ BBCapTouch bbct;
 
 void setup(){
   Serial.begin(115200);
-	while(!Serial) delay(10);
+	//while(!Serial) delay(10);
 	//setup screen data pins
 	Arduino_DataBus *bus = new Arduino_ESP32SPI(TFT_COM, TFT_CS, TFT_SCK, TFT_MOSI , TFT_MISO);
 	

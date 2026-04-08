@@ -1,26 +1,31 @@
 #pragma once
 #include "objtypes.h"
 
-// Auto-generated from input.obj
+// Auto-generated from hand.obj
 // 398 vertices, 790 edges
 
 //parameters to be changed by you
 
-float rX = 0.00; //how much to rotate X in radians per frame
+float rX = 0.00; //how much you rotate in radians per frame
 float rY = 0.02; //you get the jist
 float rZ = 0.00;
 
+float angleX = 0.00; //these are static offsets if you model imports wrong.
+float angleY = 0.00;
+float angleZ = 0.00;
+
 float fov = 2.0; //how strong perspective warping is
 
-float zoom = 0.6; //size of model
+float zoom = 0.2; //size of model
 
 int fps = 60; //how fast the animation runs, lower fps and heighten rotation if you experience performance impacts
 
-int boxW = 124; //if model is being cut off increase these, if its too large it will write over dacoration
+int boxW = 124; //bounding box model will draw inside of
 int boxH = 124;
 
 //do not touch these
-const int memUsage = 24567;
+
+const int memUsage = 14336;
 const int vertexCount = 398;
 const int edgeCount = 790;
 
