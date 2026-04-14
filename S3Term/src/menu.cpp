@@ -3,6 +3,7 @@
 #include "pins.h"
 #include "gfx.h"
 #include "cube.h"
+#include "files.h"
 
 void bl(){gfx->fillScreen(BLUE);}
 
@@ -10,7 +11,10 @@ void br(){gfx->fillScreen(RED);}
 
 void tr(){gfx->fillScreen(YELLOW);}
 
-void tl(){gfx->fillScreen(WHITE);}
+void tl(){
+	CUBE_STOP();
+	FSMENU();
+	}
 
 void buttons(){
 	//gfx->drawPixel(0,0,RED);
@@ -38,8 +42,8 @@ void buttons(){
 				}
 			}
 					
-    	} // for each touch point
-  	} //
+    	}
+  	}
 	}
 }
 
@@ -55,6 +59,13 @@ void decor(){
   gfx->drawLine(132,221, 188,221, GREEN);
   gfx->drawLine(188,221, 225,189, GREEN);
   gfx->drawLine(225,189, 319,189, GREEN);
+
+	//text
+	gfx->setTextSize(3);
+	gfx->setCursor(10,10);
+	gfx->setTextColor(GREEN);
+	gfx->print("Files");
+
 }
 
 void MENU_INIT(){
