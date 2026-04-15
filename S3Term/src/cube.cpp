@@ -5,6 +5,8 @@
 #include "objtypes.h"
 #include "model.h"
 
+//set running flag
+bool running = true;
 
 //lets other processes kill it
 TaskHandle_t cubeTaskHandle = NULL;
@@ -60,7 +62,7 @@ void cubeTask(void* pvParameters){
 	Arduino_Canvas*	buffer = new Arduino_Canvas(boxW, boxH, gfx, (screenW-boxW)/2, (screenH-boxH)/2, true);
 	buffer->begin(GFX_SKIP_OUTPUT_BEGIN); //this parameter just writes the buffer without restarting the screen
 
-	while (true) {
+	while (running) {
 
 		//Serial.printf("stack remaining: %d\n\r", uxTaskGetStackHighWaterMark(NULL));
 
@@ -94,9 +96,12 @@ void cubeTask(void* pvParameters){
 
 		vTaskDelay(pdMS_TO_TICKS(1000/fps));
 	}
+	cubeTaskHandle = NULL; //kill yourself NOW
+	vTaskDelete(NULL);
 }
 
 void CUBE() {
+	running = true;
 	xTaskCreatePinnedToCore(
 		cubeTask,
 		"cubeTask",
@@ -109,8 +114,8 @@ void CUBE() {
 }
 
 void CUBE_STOP() {
-	if (cubeTaskHandle != NULL) {
-		vTaskDelete(cubeTaskHandle);
-		cubeTaskHandle = NULL;
+	running = false;
+	while (cubeTaskHandle != NULL) {
+		vTaskDelay(pdMS_TO_TICKS(10));
 	}
 }

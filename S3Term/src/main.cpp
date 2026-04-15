@@ -14,6 +14,9 @@ Arduino_GFX* gfx = nullptr;
 //putting another here bc i cant be bothered. i'll change if we have more globals
 BBCapTouch bbct;
 
+
+
+
 void setup(){
   Serial.begin(115200);
 	//while(!Serial) delay(10);
@@ -36,12 +39,6 @@ void setup(){
 	//turn on backlight
 	pinMode(TFT_BL, OUTPUT);
 	digitalWrite(TFT_BL, HIGH);
-
-	//some hardware tests because i wanted the boot sequence to look cool
-  Wire.begin(I2C_SDA, I2C_SCL);
-  I2C_TEST();
-	SD_MMC.setPins(SD_CLK, SD_CMD, SD_D0, SD_D1, SD_D2, SD_D3);
-	SD_TEST();
 
 	/////////////////
 	//LINE OF SHAME//_______________________

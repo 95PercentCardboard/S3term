@@ -2,7 +2,7 @@
 #include <bb_captouch.h>
 #include "pins.h"
 #include "gfx.h"
-#include <SD_MMC.h>
+#include "sdusb.h"
 
 void Popup(){
 	gfx->fillRoundRect(
@@ -24,9 +24,11 @@ void Popup(){
 }
 
 void USB(){
+	Popup();
 	gfx->setCursor(0,0);
 	gfx->setTextSize(1);
-	gfx->print("unassigned selection");
+	gfx->print("usb starting");
+	SD_USB();
 }
 
 void System(){
@@ -42,7 +44,13 @@ void SDCard(){
 }
 
 void FSMENU(){
+	Serial.println("fsmenu predraw");
+	    Serial.print("Free heap: ");
+    Serial.println(ESP.getFreeHeap());
+    Serial.print("Free stack: ");
+    Serial.println(uxTaskGetStackHighWaterMark(NULL));
 	Popup();
+	Serial.println("Fsmenu started");
 	gfx->setCursor(20,20); //cant make this one line or else a
 	gfx->setTextSize(1);   //ustack overflow happens for some reason
 	gfx->setTextColor(WHITE);

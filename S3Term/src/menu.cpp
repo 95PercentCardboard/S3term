@@ -13,6 +13,7 @@ void tr(){gfx->fillScreen(YELLOW);}
 
 void tl(){
 	CUBE_STOP();
+	Serial.println("Cube stopped");
 	FSMENU();
 	}
 
