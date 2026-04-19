@@ -64,7 +64,7 @@ int SD_USB(){
 	Serial.println("Mounting SDcard");
 	SD_MMC.setPins(SD_CLK, SD_CMD, SD_D0, SD_D1, SD_D2, SD_D3);
   
-	if (!SD_MMC.begin("/sdcard", false)) {
+	if (!SD_MMC.begin("/sdcard", false, false, SDMMC_FREQ_HIGHSPEED)) {
     Serial.println("Mount Failed");
     return 1;
   }

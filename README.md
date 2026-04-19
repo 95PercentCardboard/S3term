@@ -22,10 +22,12 @@ as of now its just a menu with some test actions when the corners are touched.
 planned features:<br>
 settings menu<br>
 app launcher<br>
-custom menu models<br>
+[Added] ~~custom menu models~~<br>
 debug terminal<br>
 LoRa radio capabilities<br>
 16-bit audio DAC<br>
 [CardKb](https://shop.m5stack.com/products/cardkb-mini-keyboard-programmable-unit-v1-1-mega8a?variant=43165484482817) support<br>
 circuitpython interperator<br>
 [maybe] wii nunchuck support<br>
+filesystem<br>
+[Added] ~~sd card over usb~~<br>

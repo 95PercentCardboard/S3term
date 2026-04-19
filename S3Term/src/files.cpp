@@ -51,8 +51,8 @@ void FSMENU(){
     Serial.println(uxTaskGetStackHighWaterMark(NULL));
 	Popup();
 	Serial.println("Fsmenu started");
-	gfx->setCursor(20,20); //cant make this one line or else a
-	gfx->setTextSize(1);   //ustack overflow happens for some reason
+	gfx->setCursor(20,20); //stack overflow solved but im keeping it like this
+	gfx->setTextSize(1);   
 	gfx->setTextColor(WHITE);
 	gfx->print("    _/_/_/_/  _/  _/                      \n");
 	gfx->setCursor(20,28);
