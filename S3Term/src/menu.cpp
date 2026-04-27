@@ -4,10 +4,13 @@
 #include "gfx.h"
 #include "cube.h"
 #include "files.h"
+#include "mclient.h"
 
 void bl(){gfx->fillScreen(BLUE);}
 
-void br(){gfx->fillScreen(RED);}
+void br(){
+	CUBE_STOP();
+	MCLIENT();}
 
 void tr(){gfx->fillScreen(YELLOW);}
 
@@ -49,24 +52,32 @@ void buttons(){
 }
 
 void decor(){
-	gfx->drawLine(0,51, 95,51, GREEN);
-	gfx->drawLine(95,51, 132,19, GREEN);
-	gfx->drawLine(132,19, 188,19, GREEN);
-	gfx->drawLine(188,19, 225,51, GREEN);
-	gfx->drawLine(225,51, 319,51, GREEN);
+	gfx->drawLine(0,51, 95,51, SYS);
+	gfx->drawLine(95,51, 132,19, SYS);
+	gfx->drawLine(132,19, 188,19, SYS);
+	gfx->drawLine(188,19, 225,51, SYS);
+	gfx->drawLine(225,51, 319,51, SYS);
 
-  gfx->drawLine(0,189, 95,189, GREEN);
-  gfx->drawLine(95,189, 132,221, GREEN);
-  gfx->drawLine(132,221, 188,221, GREEN);
-  gfx->drawLine(188,221, 225,189, GREEN);
-  gfx->drawLine(225,189, 319,189, GREEN);
+  gfx->drawLine(0,189, 95,189, SYS);
+  gfx->drawLine(95,189, 132,221, SYS);
+  gfx->drawLine(132,221, 188,221, SYS);
+  gfx->drawLine(188,221, 225,189, SYS);
+  gfx->drawLine(225,189, 319,189, SYS);
 
-	//text
-	gfx->setTextSize(3);
-	gfx->setCursor(10,10);
-	gfx->setTextColor(GREEN);
-	gfx->print("Files");
+  //text
+  gfx->setTextSize(3);
+  gfx->setCursor(10,10);
+  gfx->setTextColor(SYS);
+  gfx->print("Files");
 
+  gfx->setCursor(235, 10);
+  gfx->print("Wifi");
+
+  gfx->setCursor(10, 199);
+  gfx->print("SYS");
+
+  gfx->setCursor(235, 199);
+  gfx->print("APP");
 }
 
 void MENU_INIT(){

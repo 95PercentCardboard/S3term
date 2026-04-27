@@ -97,6 +97,7 @@
 #define YELLOW 0xFFE0
 #define WHITE 0xFFFF
 
+#define SYS GREEN
 ///////////
 /*aliases*/
 ///////////

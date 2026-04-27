@@ -19,7 +19,7 @@ void Popup(){
 		300,
 		220,
 		10,
-		GREEN
+		SYS
 	);
 }
 
